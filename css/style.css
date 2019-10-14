@@ -1,0 +1,65 @@
+
+#menubtn {
+    outline: none;
+    background-color: transparent;
+    border: none;
+}
+.custom-nav {
+    margin-left: -10px;
+}
+.ul-right {
+    margin-left: 60%;
+}
+.flexbox-container {
+	display: flex;
+    flex-direction: column;
+    background-color: #f1f1f1;
+    margin-right: -18px;
+    margin-left: -15px;
+    
+}
+@media only screen and (min-width: 1025px)  {
+        .cust-row {
+           max-width: 15rem;
+        }
+    }
+    @media only screen and (min-width: 481px) and (max-width: 1024px) {
+        .cust-row {
+            max-width: 10rem;
+        }
+    }
+
+.flexbox-container > div {
+  background-color: #f1f1f1;
+  text-align: center;
+
+}
+.flexbox-container .div-height {
+	background-color: rgb(255, 0, 0);
+    font-weight: bold;
+    padding-top: 1.5rem;
+   }
+.flexbox-container .div-nav {
+	margin-top: -10px;
+	height: 60rem;
+    background-color: rgb(27, 27, 43);
+    color: #6b6c70;
+}
+.flexbox-container .div-nav a{
+    color: #6b6c70;
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 0.1rem;
+    text-align: left;
+}
+.flexbox-container .div-nav a:hover {
+    background-color: #59596ed5;
+    color: white;
+}
+.flexbox-container .div-nav a .cust-fa {
+    margin-left: 0.2rem;
+    margin-right: 0.5rem;
+}
+.flexbox-container .div-nav a:hover .cust-fa {
+    color: #b10e0ed5;
+}
