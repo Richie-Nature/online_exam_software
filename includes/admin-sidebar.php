@@ -1,9 +1,9 @@
-<?php require_once("includes/admin-header.php");?>
-
-<div class="row">
-<!--  -->
-    <div class="col-5 col-sm-4 col-md-2 ">
+<div class="col-5 col-sm-4 col-md-2 item1">
         <div class = "flexbox-container">
+            <div class = "div-height">
+                <p class = "brand-txt">Online Exam Software</p>    
+            </div>
+            
             <div class = "div-nav">
                 <hr>
                 <ul class="menu-nav navbar-nav">
@@ -27,8 +27,3 @@
             
         </div><!--end div-flexbox-->
     </div><!--end div-col-->
-   
-    
-</div>
-    
-<?php require_once("includes/admin-footer.php"); ?>
