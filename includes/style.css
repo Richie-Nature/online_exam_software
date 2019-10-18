@@ -69,10 +69,7 @@
  .breadul a{
      color:  rgb(255, 0, 0);
  }
- li a .pill {
-     /* padding: 1px;
-     margin-top: -10px; */
- }
+ 
  @media only screen and (min-width: 300px) and (max-width: 600px) {
      .div-height .fc {
          font-size: 16px;
