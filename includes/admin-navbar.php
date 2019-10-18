@@ -1,12 +1,13 @@
+
 <div class="container-fluid">
 <div class="row">
-<div class="col-5 col-sm-4 col-md-2"style = "background-color: rgb(255, 0, 0);font-weight: bold; ;">
+<div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2">
   <!-- Brand -->
   <div class = "div-height" >
         <p class = "navbar-brand fc">Online Exam Software</p>    
     </div>
 </div>
-<div class="col-7 col-sm-8 col-md-10 custnav" style = "margin-left: -15px;margin-right: -15px;">
+<div class="col-6 col-sm-8 col-md-8 col-lg-9 col-xl-10 custnav" >
   <nav class="navbar  navbar-expand-md navbar-light bg-light">
                 <!-- <button class="collapsible btn btn-small" type="button" id="menubtn" >
                 <i class="fas fa-bars text-danger"></i><i class="fas fa-ellipsis-v text-danger"></i>
@@ -19,18 +20,16 @@
             </button>
           
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
-
-              <ul class="navbar-nav ul-right">
+              <div class="row">
+                <div class="col-md-12 ">
+                  <ul class="navbar-nav justify-content-end">
                     <li class="nav-item dropdown ml-3">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-envelope cust-fa"></i> 
+                  <i class="fas fa-envelope cust-fa"><!--<span class="badge badge-pill badge-danger pill">1</span>--></i> 
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Sign In</a>
-                    <a class="dropdown-item" href="#">Sign Up</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Sign Out</a>
-                  </div>
+                    <a class="dropdown-item" href="">Inbox</a>
+                    <a class="dropdown-item" href="">Sent Messages</a>
                 </li>
 
                 <li class="nav-item dropdown ml-3">
@@ -38,27 +37,19 @@
                   <i class="fas fa-clipboard-list cust-fa"></i>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Sign In</a>
-                    <a class="dropdown-item" href="#">Sign Up</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Sign Out</a>
-                  </div>
+                    <a class="dropdown-item" href="#">lorem</a>
+                    <a class="dropdown-item" href="#">ipsum</a>
                 </li>
 
                 <li class="nav-item dropdown ml-3">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-bell cust-fa"></i>
+                  <i class="fas fa-bell cust-fa"><!--<span class="badge badge-pill badge-warning pill">new</span>--></i>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Sign In</a>
-                    <a class="dropdown-item" href="#">Sign Up</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Sign Out</a>
-                  </div>
+                    <a class="dropdown-item" href="#">Notifications <span class = "badge badge-primary">4</span> </a>
+                    <a class="dropdown-item" href="#">Reminders <span class="badge badge-primary">2</span> </a>
                 </li>
 
-                <div class="row">
-                    <div class="col-md-12">
                         <li class="nav-item dropdown ml-3"> 
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-user-circle cust-fa"> <span>Admin Richie</span> </i>
@@ -70,10 +61,11 @@
                     <a class="dropdown-item" href="#">Sign Out</a>
                   </div>
                 </li>
-                    </div>
-                </div>
                 
               </ul>
+                </div><!--ul-->
+              </div>
+              
               
             </div>
           </nav> 
