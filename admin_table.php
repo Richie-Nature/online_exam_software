@@ -1,17 +1,17 @@
 <?php require_once("includes/connection.php"); ?>
 <?php require_once("includes/functions.php");?>
 <?php require_once("includes/admin-header.php");?>
-<div class="container-fluid bg-dark admin-table-bg">
+<div class="admin-table-bg">
     <div class="row">
         <div class="col-sm-12 text-center">
             <h4>Current Admins</h4>
             <p class="text-light">There are currently <strong>..</strong>Admin Users</p>
         </div>
-    </div>
-            <div class="container-fluid">
-            <div class="table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
-        <table class="table table-striped table-bordered">
-            <thead>
+    </div>  
+            
+        <div class="table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
+               <table class="table table-striped table-bordered">
+                <thead>
                 <tr>
                     <th>Id</th>
                     <th>Firstname</th>
@@ -63,8 +63,12 @@
             </tbody>
         </table>
 </div>
+        
+<a href="edit_admins.php" class = "btn-sm btn btn-danger">Cancel</a>
+
+
 </div>
-    <a href="edit_admins.php" class = "btn-sm btn btn-danger">Cancel</a>
 </div>
+
 
 <?php require_once("includes/admin-footer.php"); ?>

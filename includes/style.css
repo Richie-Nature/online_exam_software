@@ -58,6 +58,7 @@
     background-color: rgb(255, 0, 0);
     font-weight: bold;
     margin: -16px;
+    position: fixed;
  }
  .custnav {
      margin-left: -15px;
@@ -117,14 +118,26 @@
 .cardimg {
     max-width: 20px;
 }
-.admin-table-bg {
-    height: 800px;
+
+/* @media only screen and (min-width: 300px) and (max-width: 1600px) {
+    body{
     background-image: url("../img/career-corporate-job2.jpg");
     background-color: #cccccc;
     background-position: center;
-    background-size: cover;
+    background-size: 100%, 100%;
     background-repeat: no-repeat;
-    
+    overflow:hidden;
+}
+} */
+
+.admin-table-bg {
+
+    background-image: url("../img/career-corporate-job2.jpg");
+    background-color: #cccccc;
+    background-position: center;
+    background-size: 100%, 100%;
+    background-repeat: no-repeat;
+    overflow:hidden;
 }
   th{
     color: antiquewhite;
@@ -179,4 +192,18 @@ td {
 }
 textarea {
     resize: none;
+}
+.exam-drop:hover > .dropdown-menu {
+    display: block;
+}
+.exam-drop > .dropdown-toggle:active {
+    /*without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+.exam-drop > .dropdown-menu a:hover {
+    background-color: rgb(38, 133, 241);
+    color: #f1f1f1
+}
+.exam-drop > .dropdown-menu a {
+    font-size: 12px;
 }

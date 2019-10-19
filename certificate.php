@@ -22,15 +22,92 @@
       </ul>
       </div>
     </div><!--row-->
-    <div class="row">
-      <div class="col-12 col-sm-6">
-        <h5 class="text-success">Certificates Available: <span class="text-dark"><strong>4</strong></span></h5>
+    <div class="row mb-3">
+      <div class="col-12 ">
+        <h5 class="text-success text-center">Certificates Available: <span class="text-dark"><strong>4</strong></span></h5>
       </div>
-      <div class="col-12 col-sm-5 offset-sm-1">
-        
+      <!-- <div class="col-12 col-sm-2"> -->
+      <div class="dropdown dropright exam-drop">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          Select Exam
+        </button>
+        <div class="dropdown-menu ">
+          <a class="dropdown-item" href="exam-report.php">Java SE</a>
+          <a class="dropdown-item" href="exam-report.php">OOP Concepts</a>
+          <a class="dropdown-item" href="exam-report.php">Comptia A+</a>
+          <a href="exam-report.php" class="dropdown-item">React Junior Test</a>
+        </div>
+    <!-- </div> -->
       </div>
     </div><!--card row-->
     <div class="row">
+      <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-2">
+      <div class="card bg-danger">
+          <div class="card-body text-center">
+            <h5 class="card-title text-light">Java SE Certificate</h5>
+            <hr class="my-4">
+            <div class="row">
+              <div class="col-12">
+                <a href="" class="btn btn-sm btn-primary card-text mb-2">View certified</a><span class="badge badge-warning">25</span>
+              </div>
+                <div class="col-12">
+                  <a href="" class="btn btn-sm btn-success card-text">Certify Students</a><span class="badge badge-warning">8</span>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-2">
+      <div class="card bg-danger">
+          <div class="card-body text-center">
+            <h5 class="card-title text-light">OOP Advanced Certificate</h5>
+            <hr class="my-4">
+            <div class="row">
+              <div class="col-12">
+                <a href="" class="btn btn-sm btn-primary card-text mb-2">View certified</a><span class="badge badge-warning">30</span>
+              </div>
+                <div class="col-12">
+                  <a href="" class="btn btn-sm btn-success card-text">Certify Students</a><span class="badge badge-warning">5</span>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-2">
+      <div class="card bg-danger">
+          <div class="card-body text-center">
+            <h5 class="card-title text-light">Comptia A+ Certificate</h5>
+            <hr class="my-4">
+            <div class="row">
+              <div class="col-12">
+                <a href="" class="btn btn-sm btn-primary card-text mb-2">View certified</a><span class="badge badge-warning">15</span>
+              </div>
+                <div class="col-12">
+                  <a href="" class="btn btn-sm btn-success card-text">Certify Students</a><span class="badge badge-warning">1</span>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-2">
+      <div class="card bg-danger">
+          <div class="card-body text-center">
+            <h5 class="card-title text-light">React Certificate</h5>
+            <hr class="my-4">
+            <div class="row">
+              <div class="col-12">
+                <a href="" class="btn btn-sm btn-primary card-text mb-2">View certified</a><span class="badge badge-warning">25</span>
+              </div>
+                <div class="col-12">
+                  <a href="" class="btn btn-sm btn-success card-text">Certify Students</a><span class="badge badge-warning">3</span>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
    </div><!--colsm8major-->

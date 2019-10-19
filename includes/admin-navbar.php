@@ -3,7 +3,7 @@
 <div class="row">
 <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2">
   <!-- Brand -->
-  <div class = "div-height" >
+  <div class = "div-height navbar" >
         <p class = "navbar-brand fc">Online Exam Software</p>    
     </div>
 </div>

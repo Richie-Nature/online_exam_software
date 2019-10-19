@@ -1,7 +1,6 @@
 <?php require_once("includes/connection.php"); ?>
 <?php require_once("includes/functions.php");?>
 <?php require_once("includes/admin-header.php");?>
-
 <div class="container-fluid exam-form-bg bg-dark">
     <div class="row">
         <div class="col-6 col-sm-4 back-btn-div">
