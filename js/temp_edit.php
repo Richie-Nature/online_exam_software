@@ -1,114 +1,10 @@
-<?php session_start(); ?>
-<?php require_once("includes/connection.php"); ?>
-<?php require_once("includes/functions.php");?>
-<?php confirm_logged_in();?>
-<?php require_once("includes/admin-header.php");?>
-<?php require_once("includes/admin-navbar.php");?>
-<div class="container-fluid">
-<?php  require_once("includes/admin-sidebar.php"); ?>
 
-
-
-   <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 col-6 content-area">
-      <div class="row">
-        <div class="col-sm-6 col-12">
-          <h3>Manage Users > Users</h3>
-        </div>                  
-        
-    </div><!--row-->
-    <div class="row">
-      <div class="col-sm-8">
-        <ul class="breadcrumb breadul">
-          <li class="breadcrumb-item "><a href="#" class = "bread">Home</a></li>
-          <li class="breadcrumb-item  "><a href="#" class = "bread">lorem</a></li>
-          <li class="breadcrumb-item bread active">lorem</li>
-      </ul>
-      </div>
-    </div><!--row-->
     
-    <?php 
-        if(isset($_POST['edit'])) {
-            $id = $_POST['uid'];
-            $firstname = $_POST['fname'];
-            $lastname = $_POST['lname'];
-            $username = $_POST['uname'];
-            $email = $_POST['email'];
-            $nation = $_POST['nation'];
-            $contact = $_POST['address'];
-            $phoneNo = $_POST['phone'];
-            $certs = $_POST['certs'];
-            $gend = $_POST['gender'];
-            $access = $_POST['access'];
-            $profile = $_POST['picture'];
-        }
-
-        if(isset($_POST['update'])) {
-            $msg ="";
-            $css_class = "";
-
-            $fname = $_POST['fname'];
-            $lname = $_POST['lname'];
-            $useremail = $_POST['useremail'];
-            $uname = $_POST['username'];
-            $password = $_POST['password'];
-            $nationality = $_POST['nationality'];
-            $address = $_POST['address'];
-            $gender = $_POST['gender'];
-            $phone = $_POST['phone'];
-            $passencrypt = sha1($password);
-            $access_level = $_POST['acc'];
-            $id = $_POST['id'];
-            $profileImage = time() . '_' . $_FILES['profileImage']['name'];#using current timestamp to prefix image name in case of shared names
-
-            $target = "images/" . $profileImage; #final destination
-            if(move_uploaded_file($_FILES['profileImage']['tmp_name'], $target)) {
-                
-           
-
-            $query = "UPDATE reg_users set username = '$uname', firstname = '$fname', lastname = '$lname', gender = '$gender', email = '$useremail', address = '$address', nationality = '$nationality',phone = '$phone',hashed_password = '$passencrypt', access_level = '$access_level',
-            picture = '$profileImage' 
-            WHERE id = $id";
-            $update = $connection->query($query);
-            confirm_query($update,$connection);
-            if($update) {
-                echo "<script>
-                     alert('Records Updated');
-                     window.location = edit_student.php;
-                    </script>"; 
-                }
-            }else {
-                $msg = "Failed to upload profile picture";
-                echo $msg;
-                $css_class = "alert-danger";
-            }
-        }
-    ?>
-
-    <!--DELETE HANDLER GOES HERE-->
- <?php 
-if(isset($_POST['delete'])) {
-    $id = check_input($_POST['delid']);
-
-    $query = " DELETE FROM reg_users WHERE id = $id";
-    $update = $connection->query($query);
-    if($update){ echo "<script>
-                     alert('Records Updated');
-                     window.location = 'edit_student.php';
-                     </script>";
-      }else{
-        echo "<script>
-        alert('Record Update Failed');
-        window.location = 'edit_student.php';
-        </script>";
-      }             
-    }
-
-?>    
     <div class="container">
     <div class="row">
         <div class="col-sm-8  offset-2">
             <div class=" form-border">
-            <form action="edit_student.php" method="POST" enctype = "multipart/form-data">
+            <form action="edit_admins.php" method="POST" enctype = "multipart/form-data">
                     <div class="row mb-4">
                 <div class="col-lg-2 col-md-4 col-sm-6 col-xl-3">
                 <div class="form-group text-center">
@@ -120,10 +16,10 @@ if(isset($_POST['delete'])) {
                     </div>                    
                 </div>
             <div class="col-lg-7 col-md-8 col-xl-6">
-                <h4 class="">Edit Existing Users</h4>
+                <h4 class="">Edit Existing Admins</h4>
             </div>
             <div class="col-lg-3">
-                <a href="users_table.php" class = "btn btn-info" >View Users</a>
+                <a href="admin_table.php" class = "btn btn-info" >View Admins</a>
             </div>
             </div><!-- row-->
                 <div class="row">
@@ -231,36 +127,165 @@ if(isset($_POST['delete'])) {
                  </div>
                  <div class="col-12 col-lg-6">
                      <div class="form-group">
-                         <input type="number" name="acc" id="acc" class="form-control inputs border-success" max= 3 min = 0 placeholder = "Set Access">
+                         <input type="number" name="acc" id="acc" class="form-control border-top-0 border-right-0 border-left-0 inputs border-success" max= 3 min = 0 placeholder = "Set Access" value = "<?php if(isset($access))echo $access;?>">
                      </div>
                  </div>
                  </div>
             </div>
             
-            <input type="hidden" name="id" value = "<?php if(isset($id)){echo $id;} ?>">
+                        
+                 <input type="hidden" name="id" value = "<?php if(isset($id)){echo $id;} ?>">
                  <div class="custom-control custom-checkbox ">
                         <input type="checkbox" class="custom-control-input" id="loggedIn" name="loggedIn" checked>
                         <label class="custom-control-label" for="loggedIn">Remember Password</label>
-                </div>
+                      </div>
                       <div class="row mt-4">
-                          <div class="col-12 col-sm-5 col-md-6 mb-2">
+                          <div class="col-12  col-md-4 mb-2">
                               <button type="submit" class="btn btn-success" name = "update" >Save Changes</button>
                           </div>
-                          <div class="col-12 col-md-6 ">
-                          <form action="edit_student.php" method = "POST" >
+                          <div class="col-12 col-md-4 mb-2">
+                          <form action="edit_admins.php" method = "POST" >
                              <input type="hidden" name="delid" value = "<?php if(isset($id)) {echo $id;}?>">
                              <button type="submit" class = "btn btn-danger" name = "delete" onclick="javascript:return confirm('Are you sure you want to delete this record?\nThis action cannot be reversed!');" >Delete User</button>
                             </form>  
                           </div>
+                          <div class="col-4  col-md-4">
+                              <button class = "btn  btn-danger" data-toggle="modal" data-target="#newAdminModal" data-backdrop="static" data-keyboard="false">Add New Admin</button>
+                          </div>
                       </div>
+                 
             </form>
         </div>
         </div>
         </div>
     </div>
-   </div><!--colsm8major--> 
+   </div><!--colsm8major-->
+    
 </div><!--rowmajor-->
 </div>
 
-<script src="js/admin.js"></script>
-<?php require_once("includes/admin-footer.php"); ?>
+<!-- The Modal -->
+<div class="modal fade" id="newAdminModal">
+<?php 
+    $query = "SELECT * FROM reg_users";
+    $result = $connection->query($query);
+    confirm_query($result,$connection);
+    $nOfUsers = mysqli_num_rows($result);
+?>
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Select User to Add</h4>
+                        <button type="submit" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <div class="modal-body modal-table">
+                        <div class="container">
+                            <table id="mytable" class="table table-striped table-bordered table-responsive">
+                                <thead>
+                                <tr><th>Select</th>
+                                    <th>Id</th>
+                                    <th>Picture</th>
+                                    <th>Firstname</th>
+                                    <th>Lastname</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Password</th>
+                                    <th>Nationality</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th>Gender</th>
+                                    <th>Access Level</th>
+                                    <th>Registration Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                                <?php while($row = mysqli_fetch_assoc($result)):?>
+                                        
+                                <tr><td>
+                                    <form action="" method="post" id="modForm">
+                                        <input type="hidden" name="uid" value = "<?php echo $row['id'];?>">
+                                        <input type="hidden" name="fname" value = "<?php echo $row['firstname'];?>">
+                                        <input type="hidden" name="lname" value = "<?php echo $row['lastname'];?>">
+                                        <input type="hidden" name="uname" value = "<?php echo $row['username'];?>">
+                                        <input type="hidden" name="email" value = "<?php echo $row['email'];?>">
+                                        <input type="hidden" name="password" value = "">
+                                        <input type="hidden" name="nation" value = "<?php echo $row['nationality'];?>">
+                                        <input type="hidden" name="address" value = "<?php echo $row['address'];?>">
+                                        <input type="hidden" name="phone" value = "<?php echo $row['phone'];?>">
+                                        <input type="hidden" name="gender" value = "<?php echo $row['gender'];?>">
+                                        <input type="hidden" name="access" value = "<?php echo $row['access_level'];?>">
+                                        <input type="hidden" name="picture" value = "<?php echo $row['picture'];?>">
+                                        <button type="button"  class = "btn btn-sm btn-danger sel-but buttons active" name="select" onclick = "selected(this,'modTablei');"><i class="far fa-circle modTablei"id="modTablei" ></i></button>
+                                     </form>
+                                    </td>
+                                <td><?php echo $row['id'];?></td>
+                                    <td><img src="images/<?php echo $row['picture'];?>" class="img-fluid" style ="max-height: 60px;"></td>
+                                    <td><?php echo $row['firstname'];?></td>
+                                    <td><?php echo $row['lastname'];?></td>
+                                    <td><?php echo $row['username'];?></td>
+                                    <td><?php echo $row['email'];?></td>
+                                    <td>********</td>
+                                    <td><?php echo $row['nationality'];?></td>
+                                    <td><?php echo $row['address'];?></td>
+                                    <td><?php echo $row['phone'];?></td>
+                                    <td><?php echo $row['gender'];?></td>
+                                    <td><?php echo $row['access_level'];?></td>
+                                    <td><?php echo $row['reg_date'];?></td>
+
+                                    
+                                </tr>
+                <?php endwhile;?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Id</th>
+                                    <th>Picture</th>
+                                    <th>Firstname</th>
+                                    <th>Lastname</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Password</th>
+                                    <th>Nationality</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th>Gender</th>
+                                    <th>Access Level</th>
+                                    <th>Registration Date</th>
+                                    
+                                    
+                                </tr>
+                        </tfoot>
+                        </table>
+                     </div>
+                                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                             <button type="submit"  class="btn btn-danger" data-dismiss="modal" onclick = "triggerClick('crModalBtn')">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                <button id="crModalBtn" class = "btn  btn-danger" style="display:none;" data-toggle="modal" data-target="#createAdminModal" data-backdrop="static"></button>
+<?php @require_once("create-admin.php");?>
+<?php 
+                        $id = $row['id'];
+                        $firstname = $row['firstname'];
+                        $lastname = $row['lastname'];
+                        $username = $row['username'];
+                        $email = $row['email'];
+                        $nationality = $row['nationality'];
+                        $address = $row['address'];
+                        $phone = $row['phone'];
+                        $certs = $row['no_of_certs'];
+                        $gender = $row['gender'];
+                        $access = $row['access_level'];
+                    ?>
+
+                    <form action="edit_users.php" method = "POST">
+                   
+                        <button type="submit" name = "edit" class = "btn btn-sm btn-success">Get Admin Data</button>
+                    </form>

@@ -1,7 +1,13 @@
+<?php session_start(); ?>
+<?php $admin_page = "Edit Subjects"; ?>
+<?php require("includes/functions.php");?>
+<?php require_once("includes/connection.php"); ?>
+<?php confirm_logged_in();?>
 <?php require_once("includes/admin-header.php");?>
 <?php require_once("includes/admin-navbar.php");?>
 <div class="container-fluid">
 <?php  require_once("includes/admin-sidebar.php"); ?>
+<?php require_once("includes/admin-sidepic.php");?>
    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 col-6 content-area">
       <div class="row">
         <div class="col-8-4 col-12">
@@ -19,50 +25,56 @@
       </div>
     </div><!--row-->
     <div class="row">
-      <div class="col-sm-5 col-md-5 es-head">
+      <!-- <div class="col-xs-5 col-md-5 es-head">
         <h5 class="text-primary">Current Exams <i class = "text-muted">Available*:</i>20</h5>
-      </div>
-      <div class="col-sm-5 col-md-5">
-      <form class="form-inline" action="">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-success" type="submit">Search</button>
+      </div> -->
+      <div class="col-xs-5 col-md-12 offset-lg-2">
+      <form class="form-inline" action="" method="POST">
+        <label for="exam_name" class="form-label mr-sm-2">Add New Exam:</label>
+        <input class="form-control mr-sm-2 mb-2" id="exam_name" type="text" placeholder="Enter Exam Name">
+        <input type="number" name="no_fields" id="no_fields"  class = "form-control mr-sm-2 mb-2" placeholder = "No of Questions:" onblur = "generateFields();">
+        <button class="btn btn-success mb-2" type="submit">Submit</button>
       </form>
-      </div>
-      <div class="col-sm-1 col-md-1">
-        <a href="add_subjects.php" class="btn btn-danger">Add New</a>
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-xs-12">
         <small class= "text-muted" >*Exams Available to you, depend on your access level</small>
       </div>
     </div>
     <div class="row">
     <div class="container-fluid">
-            <div class="table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
-        <table class="table table-dark table-bordered">
+    <?php 
+      $query = "SELECT * FROM tblexams WHERE visibility = 1";
+      $result = $connection->query($query);
+      confirm_query($result, $connection);
+      $nOfExams = mysqli_num_rows($result);
+    ?>
+    <table id="mytable" class="table table-striped table-bordered table-dark table-responsive-sm table-responsive-md table-responsive-lg ">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>S/N</th>
                     <th>Exam Type</th>
                     <th>Date Created</th>
                     <th>Created By</th>
                     <th>Last Modified</th>
-                    <th rowspan = "2" >Action</th>
+                    <th>**</th>
+                    <th>**</th>
                 </tr>
             </thead>
             <tbody>
+            <?php while($row = mysqli_fetch_assoc($result)): ?>
                 <tr>
-                    <td>1</td>
-                    <td>Java SE</td>
-                    <td><?php echo date('Y-m-d');?></td>
-                    <td>Oracle inc.</td>
-                    <td><?php echo date('Y-m-d');?></td>
+                    <td><?php echo $row['id'];?></td>
+                    <td><?php echo $row['subjects']; ?></td>
+                    <td><?php echo $row['date_created']; ?></td>
+                    <td><?php echo $row['created_by']; ?></td>
+                    <td><?php echo $row['last_modified'];?></td>
                     
                     <td>
                     <form action="exam-edit.php" method = "POST">
-                        <input type="hidden" name="sid" value = "">
-                        <input type="hidden" name="subject" value = "">
+                        <input type="hidden" name="examId" value = "<?php echo $row['id']; ?>">
+                        <input type="hidden" name="examName" value = "<?php echo $row['subjects']; ?>">
                         <button type="submit" name = "edit" class = "btn btn-sm btn-success">Edit</button>
                     </form>
                     </td>
@@ -74,6 +86,7 @@
                     </form>
                     </td>
                 </tr>
+                <?php endwhile;?>
             </tbody>
         </table>
 </div>

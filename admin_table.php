@@ -1,74 +1,130 @@
-<?php require_once("includes/connection.php"); ?>
-<?php require_once("includes/functions.php");?>
-<?php require_once("includes/admin-header.php");?>
-<div class="admin-table-bg">
+
+
+<?php 
+    $query = "SELECT * FROM reg_users";
+    if($_SESSION['access'] == 1){ $query .= " WHERE access_level < 1";}
+    $result = $connection->query($query);
+    confirm_query($result,$connection);
+    $nOfUsers = mysqli_num_rows($result);
+?>
+
+<div class="container-fluid ">
     <div class="row">
         <div class="col-sm-12 text-center">
-            <h4>Current Admins</h4>
-            <p class="text-light">There are currently <strong>..</strong>Admin Users</p>
+            <h4>Current Users</h4>
+            <p class="text-success">There <?php if($nOfUsers == 1)echo "is";else{echo "are";} ?> currently <strong><?php echo $nOfUsers;?></strong> <?php if($nOfUsers == 1)echo " User";else{echo " Users";} ?> available to You.</p>
+            <small class="text-muted">*Users available to you for Editing depend on Seniority level</small>
         </div>
-    </div>  
+    </div>
+
             
-        <div class="table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
-               <table class="table table-striped table-bordered">
+        
+            <table id="mytable" class="table table-striped table-bordered table-dark table-responsive-sm table-responsive-md table-responsive-lg">
                 <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
+                    <th>S/N</th>
+                    <th>Picture</th>
+                    <th>Name</th>
                     <th>Username</th>
                     <th>Email</th>
-                    <th>Password</th>
-                    <th>Nationality</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>Gender</th>
-                    <th>Access Level</th>
-                    <th>Registration Date</th>
-                    <th>Picture</th>
+                    <th>Level</th>
+                    <th>Edit</th>
+                    
                 </tr>
             </thead>
             <tbody>
+            
+                 <?php while($row = mysqli_fetch_assoc($result)):?>
+                        
                 <tr>
-                    <td>1</td>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>Jdoe</td>
-                    <td>jonny@example.com</td>
-                    <td>dddfff</td>
-                    <td>Czech</td>
-                    <td>24 some street</td>
-                    <td>214-123-355</td>
-                    <td>Male</td>
-                    <td>1</td>
-                    <td><?php echo date('Y-m-d h-i-sa');?></td>
-                    <td><img src="img/profileicon1.png" alt="" class="img-fluid"></td>
+                <td><?php echo $row['id'];?></td>
+                    <td><img src="images/<?php echo $row['picture'];?>" class="img-fluid" style ="max-height: 80px"></td>
+                    <td><?php echo $row['firstname'];?> <?php echo $row['lastname'];?></td>
+                    <td><?php echo $row['username'];?></td>
+                    <td><?php echo $row['email'];?></td>
+                    <td> <?php if($row['access_level'] <1){echo "User";}elseif($row['access_level']>1){echo "Super Admin";}else{echo "Admin";} ?></td>
                     <td>
-                    <form action="" method = "POST">
-                        <input type="hidden" name="uid" value = "">
-                        <input type="hidden" name="fname" value = "">
-                        <input type="hidden" name="lname" value = "">
-                        <input type="hidden" name="uname" value = "">
-                        <input type="hidden" name="email" value = "">
-                        <input type="hidden" name="password" value = "">
-                        <input type="hidden" name="nation" value = "">
-                        <input type="hidden" name="address" value = "">
-                        <input type="hidden" name="phone" value = "">
-                        <input type="hidden" name="gender" value = "">
-                        <input type="hidden" name="access" value = "">
-                        <button type="submit" name = "edit" class = "btn btn-sm btn-success">Get Admin Data</button>
-                    </form>
+                        <div class="container">                                       
+                        <div class="dropright">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                            Options
+                            </button>
+                            <div class="dropdown-menu cust-drop">
+                            <form action="" method="post">
+                                <input type="hidden" name="addId" value="<?php echo $row['id'];?>">
+                                <p class="dropdown-item mb-1" style="display:<?php if($row['access_level'] ==2){echo "none";} ?>"> 
+                                <button type="submit" name="add" class="btn btn-sm btn-primary drop-btn ml-3"  <?php if($row['access_level'] ==2 || $row['access_level'] <0){echo "disabled";} ?>><?php if($row['access_level'] ==1){echo "Make(SuperAdmin)";}elseif($row['access_level'] ==0){echo "Make(Admin)";} ?></button> </p>
+                            </form>
+                            
+                            <p class="dropdown-item mb-1">
+                            <button type="button" name="edit" id="edit" class="btn btn-sm btn-primary drop-btn ml-3"
+                                data-toggle="modal" data-target="#createAdminModal" data-backdrop="static"
+                                data-id="<?php echo $row['id'];?>"
+                                data-fname="<?php echo $row['firstname'];?>"
+                                data-lname="<?php echo $row['lastname'];?>"
+                                data-uname="<?php echo $row['username'];?>"
+                                data-email="<?php echo $row['email'];?>"
+                                data-nation="<?php echo $row['nationality'];?>"
+                                data-address="<?php echo $row['address'];?>"
+                                data-phone="<?php echo $row['phone'];?>"
+                                data-gender="<?php echo $row['gender'];?>"
+                                data-access="<?php echo $row['access_level'];?>"
+                                data-picture="<?php echo $row['picture'];?>" 
+                                data-password="<?php echo $row['hashed_password'];?>"
+                            >Edit</button></p>
+                            <form action="" method="post">
+                                <input type="hidden" name="susId" value="<?php echo $row['id']; ?>">
+                                <p class="dropdown-item mb-1"><button type="submit" name="suspend" class="btn btn-sm btn-primary drop-btn ml-3"<?php if($row['access_level'] ==2){echo "disabled";}?>>Suspend</button></p>
+                            </form>
+                            <form action="" method="post">
+                            <input type="hidden" name="delid" value="<?php echo $row['id']; ?>">
+                                <p class="dropdown-item mb-1"><button type="submit" name="delete" class="btn btn-sm btn-danger drop-btn ml-3" onclick="javascript:return confirm('Are you sure you want to delete this record?\nThis action cannot be reversed!');">Delete</button></p>
+                            </form>
+                            
+                            </div>
+                        </div>
+                        </div>
+                    
                     </td>
                 </tr>
+<?php endwhile;?>
             </tbody>
         </table>
-</div>
         
-<a href="edit_admins.php" class = "btn-sm btn btn-danger">Cancel</a>
+        <script>
+            $(document).on("click", '#edit', function(e){
+                var id = $(this).data('id');
+                var fname = $(this).data('fname');
+                var lname = $(this).data('lname');
+                var uname = $(this).data('uname');
+                var email = $(this).data('email');
+                var nation = $(this).data('nation');
+                var address = $(this).data('address');
+                var phone = $(this).data('phone');
+                // var gender = $(this).data('gender');
+                var access = $(this).data('access');
+                var picture = $(this).data('picture');
+                var password = $(this).data('password');
+
+                $("#id").val(id);
+                $("#fname").val(fname);
+                $("#lname").val(lname);
+                $("#useremail").val(email);
+                $(".username").val(uname);
+                $("#nationality").val(nation);
+                $("#address").val(address);
+                //$("#male").val(gender);
+                $("#phone").val(phone);
+                $("#acc").val(access);
+                $("img").attr("src", "images/"+picture);
+                $("#pic").val(picture);
+                $("")
+            });
+        </script>
+        
+        <?php include("create-admin.php");?> 
+
 
 
 </div>
 </div>
-
-
-<?php require_once("includes/admin-footer.php"); ?>

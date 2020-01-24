@@ -1,13 +1,19 @@
+<?php session_start(); ?>
+<?php $admin_page = "Monitor Exams"; ?>
 <?php require_once("includes/admin-header.php");?>
+<?php require("includes/functions.php");?>
+<?php require_once("includes/connection.php"); ?>
 <?php require_once("includes/admin-navbar.php");?>
+<?php confirm_logged_in();?>
 <div class="container-fluid" onmouseenter = "setTimeout('timeOnly(2,59,59);', 1000);">
-<?php  require_once("includes/admin-sidebar.php"); ?>
+<?php  require_once("includes/admin-sidebar.php");?>
+<?php require_once("includes/admin-sidepic.php");?>
    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 col-6 content-area">
       <div class="row">
         <div class="col-sm-4 col-6">
           <h3>Monitor Exams</h3>
         </div>                  
-        <div class="col-sm-6 col-6 offset-sm-2 ">
+        <div class="col-sm-6 col-6 offset-sm-2">
           <p id="clock" class="text-danger lead"></p>
         </div>
     </div><!--row-->

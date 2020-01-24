@@ -1,7 +1,13 @@
+<?php session_start();?>
+<?php $admin_page = "Edit Pages"; ?>
+<?php require("includes/functions.php");?>
+<?php require_once("includes/connection.php"); ?>
+<?php confirm_logged_in();?>
 <?php require_once("includes/admin-header.php");?>
 <?php require_once("includes/admin-navbar.php");?>
 <div class="container-fluid">
 <?php  require_once("includes/admin-sidebar.php"); ?>
+<?php require_once("includes/admin-sidepic.php");?>
    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 col-6 content-area">
       <div class="row">
         <div class="col-sm-4 col-12">

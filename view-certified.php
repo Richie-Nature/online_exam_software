@@ -1,7 +1,6 @@
 <?php session_start(); ?>
 <?php require_once("includes/connection.php"); ?>
 <?php require_once("includes/functions.php");?>
-
 <?php confirm_logged_in();?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +48,6 @@
                         <th>Time consumed</th>
                         <th>Date Taken</th>
                         <th>Certified</th>
-                        <th rowspan = "2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,8 +61,7 @@
                         <td> 1hr: 23m: 3s </td>
                         <td><?php echo date(" Y-m-d h:i:sa"); ?></td>
                         <td>Yes</td>
-                        <td> <a href="" class="btn btn-sm btn-success">Give Result</a> </td>
-                        <td> <a href="" class="btn btn-sm btn-success">Certify</a> </td>
+    
                     </tr>
                     <tr>
                 <td>2</td>
@@ -76,8 +73,7 @@
                 <td> 1hr: 23m: 3s </td>
                 <td><?php echo date(" Y-m-d h:i:sa"); ?></td>
                 <td>No</td>
-                <td> <a href="" class="btn btn-sm btn-success">Give Result</a> </td>
-                <td> <a href="" class="btn btn-sm btn-success">Certify</a> </td>
+                
               </tr>
               <tr>
                 <td>3</td>
@@ -89,8 +85,7 @@
                 <td> 1hr: 23m: 3s </td>
                 <td><?php echo date(" Y-m-d h:i:sa"); ?></td>
                 <td>Yes</td>
-                <td> <a href="" class="btn btn-sm btn-success">Give Result</a> </td>
-                <td> <a href="" class="btn btn-sm btn-success">Certify</a> </td>
+                
               </tr>
               <tr>
                 <td>4</td>
@@ -102,8 +97,7 @@
                 <td> 1hr: 23m: 3s </td>
                 <td><?php echo date(" Y-m-d h:i:sa"); ?></td>
                 <td>No</td>
-                <td> <a href="" class="btn btn-sm btn-success">Give Result</a> </td>
-                <td> <a href="" class="btn btn-sm btn-success">Certify</a> </td>
+                
               </tr>
               <tr>
                 <td>5</td>
@@ -115,8 +109,7 @@
                 <td> 1hr: 23m: 3s </td>
                 <td><?php echo date(" Y-m-d h:i:sa"); ?></td>
                 <td>Yes</td>
-                <td> <a href="" class="btn btn-sm btn-success" >Give Result</a> </td>
-                <td> <a href="" class="btn btn-sm btn-success">Certify</a> </td>
+                
               </tr>
               <tr>
                 <td>6</td>
@@ -128,8 +121,7 @@
                 <td> 1hr: 23m: 3s </td>
                 <td><?php echo date(" Y-m-d h:i:sa"); ?></td>
                 <td>Yes</td>
-                <td> <a href="" class="btn btn-sm btn-success">Give Result</a> </td>
-                <td> <a href="" class="btn btn-sm btn-success">Certify</a> </td>
+                
               </tr>
                 </tbody>
                 <tfoot>
@@ -143,7 +135,6 @@
                         <th>Time consumed</th>
                         <th>Date Taken</th>
                         <th>Certified</th>
-                        <th>Action</th>
                     </tr>
                 </tfoot>
             </table>
