@@ -2,8 +2,8 @@
 <?php require_once("includes/functions.php");?>
 
 <?php #EXISTING QUESTIONS FIRST READ INORDER TO ASCERTAIN WHAT QUERY TO BE PERFORMED ON QUESTION TO BE SUBMITTED EITHER UPDATE OR INSERT
-$exam_id = $_GET['examID'];
-    
+$exam_id = check_input($_GET['id']);
+$modified = check_input($_GET['m']);    
     $readQuery = "SELECT * FROM tblquestions WHERE exam_nameID = :exam_id AND question = :question";
     
     for ($i = 0; $i < count($_POST['hidden_examId']); $i++) {
@@ -47,8 +47,12 @@ $exam_id = $_GET['examID'];
         ':score' => $_POST['hidden_score'][$i],
         ':date'  => $_POST['hidden_date'][$i]
     );
-    
 
+    #UPDATE LAST MODIFIED ON EXAMS TABLE
+    $sql = "UPDATE tblexams SET last_modified = '$modified' WHERE id = $exam_id";
+	$modify = $connection->query($sql);
+	confirm_query($modify, $connection);
+   
     $statement = $connection->prepare($query);
     $statement->execute($data);
     // if(!$statement){

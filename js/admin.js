@@ -115,10 +115,15 @@ function selected(e,fa_id) {
    
 }
 function confirmCancel() {  
-   confirm('You have unsaved changes; are you sure you want to leave this page?');
+   if(!confirm('You have unsaved changes; are you sure you want to leave this page?')){
+       return false;
+   }else{
+       return true;
+   }
 }
 function confirmDelete() {
-    confirm('Are you sure you want to delete this?');
+   return confirm('Are you sure you want to delete this?');
+   
 }
 function generateFields() {
     let numberofDivs = document.querySelector('#no_fields').value;

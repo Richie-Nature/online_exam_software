@@ -377,3 +377,6 @@ div.sticky {
     position: fixed;
     right: 0;
   }
+.disabled {
+    cursor: not-allowed;
+}

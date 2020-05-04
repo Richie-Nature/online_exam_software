@@ -15,43 +15,52 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">  
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-    <title>Admin|<?php if(isset($admin_page)){echo $admin_page;}?></title>
+    <title>Online Exam Software|<?php if(isset($admin_page)){echo $admin_page;}?></title>
+    <script>
+        $(document).ready(function(){
+            const page = "<?php if(isset($admin_page)){echo $admin_page;}?>";
+            if (page == "Dashboard" || page == "Monitor Exams" || page == "Certifications & Results") {
+                displayTime();
+            }
+        })
+    </script>
     <script>
         function displayTime() {
-    let currentDate = new Date(),
-     year = currentDate.getYear();
-        if(year < 1000){
-            year += 1900;
-        }
-     let day = currentDate.getDay(),
-     month = currentDate.getMonth(),
-     day_mth = currentDate.getDate(),
-     day_array = new Array("Sun.","Mon.","Tues.","Wed.","Thurs.","Fri.","Sat."),
-     month_array = new Array("Jan","Feb","March","April","May","June","July","Aug.","Sept.","Oct.","Nov.","Dec.");
-     const suffix = getDayOfMonthSuffix(day_mth);
-     //Time
-     let currentTime = new Date(),
-     h = currentTime.getHours(),
-     m = currentTime.getMinutes(),
-     s = currentTime.getSeconds();
-        if(h == 24){
-            h = 0;
-        }
-        if(h < 10) {
-            h = "0" + h; 
-        }
-        if(m < 10){
-            m = "0" + m;
-        }
-        if(s < 10){
-            s = "0" + s;
-        }
-        const clock = document.querySelector('p#clock');
-        clock.textContent = day_array[day]+ " "+day_mth+suffix+" "+month_array[month]+ " "+year+ " | "
-        +h+ ":"+m+":"+s;
+            let currentDate = new Date(),
+            year = currentDate.getYear();
+                if(year < 1000){
+                    year += 1900;
+                }
+            let day = currentDate.getDay(),
+            month = currentDate.getMonth(),
+            day_mth = currentDate.getDate(),
+            day_array = new Array("Sun.","Mon.","Tues.","Wed.","Thurs.","Fri.","Sat."),
+            month_array = new Array("Jan","Feb","March","April","May","June","July","Aug.","Sept.","Oct.","Nov.","Dec.");
+            const suffix = getDayOfMonthSuffix(day_mth);
+            //Time
+            let currentTime = new Date(),
+            h = currentTime.getHours(),
+            m = currentTime.getMinutes(),
+            s = currentTime.getSeconds();
+                if(h == 24){
+                    h = 0;
+                }
+                if(h < 10) {
+                    h = "0" + h; 
+                }
+                if(m < 10){
+                    m = "0" + m;
+                }
+                if(s < 10){
+                    s = "0" + s;
+                }
+                const clock = document.querySelector('p#clock');
+                clock.textContent = day_array[day]+ " "+day_mth+suffix+" "+month_array[month]+ " "+year+ " | "
+                +h+ ":"+m+":"+s;
 
-        setTimeout("displayTime()", 1000);
- }
+                setTimeout("displayTime()", 1000);
+ 
+}
  displayTime();
  function timeOnly(h,m,s) {
         if(h == 24){
@@ -97,5 +106,5 @@ function getDayOfMonthSuffix(n) {
     </script>
     
 </head>
-<body onload="displayTime();"  >
+<body>
    

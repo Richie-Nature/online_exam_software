@@ -6,21 +6,27 @@
 if(isset($_GET['id'])) {
     $id = check_input($_GET['id']);
 
-    $query = " DELETE FROM student_users WHERE id = $id";
-    $update = $connection->query($query);
-    if($update){ echo "<script>
-                     alert('Records Updated');
-                     window.location = 'edit_student.php';
-                     </script>";
+    if(delete('student_users','id',$id,$connection)) { 
+     echo "<script>
+          alert('Records Updated');
+          window.location = 'edit_student.php';
+          </script>";
       }              
     } elseif(isset($_GET['question_id'])) {
       $id = check_input($_GET['question_id']);
       
-      $query = "DELETE FROM tblquestions WHERE id = $id";
-      $update = $connection->query($query);
-      if($update){
+      if(delete('tblquestions','id',$id,$connection)) { 
         $order_query = re_order('tblquestions');
-        $re_order = $connection->query($order_query);
+        $re_order = $connection->multi_query($order_query);
+      }
+    } elseif(isset($_POST['sid'])) {
+      $xid = $_POST['sid'];
+      if(delete('tblexams','id',$xid,$connection)) {
+        if(delete('tblquestions','exam_nameID',$xid,$connection)){
+          $order_query = re_order('tblquestions');
+          $order_query .= re_order('tblexams');
+          $re_order = $connection->multi_query($order_query);
+        }else{echo "Exams not deleted: ".mysqli_error(delete('tblexams','id',$xid,$connection));}
       }
     }
 
